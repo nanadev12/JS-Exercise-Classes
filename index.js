@@ -176,11 +176,13 @@ class Student extends Lambdasian{
   listSubjects(){
     return `loving ${this.favSubjects}` /* why does it accept this. and not obj.*/
   }
-  PRAssignment(science){
-    return `${student.name} has submitted a PR for ${science}`;
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
   }
+  sprintChallenge(subject1){
+   return `${this.name} has begun sprint challenge on ${subject1}`
+ }
 }
-
 /*
   TASK 6
     - Write a ProjectManager class extending Instructor.
@@ -194,10 +196,22 @@ class Student extends Lambdasian{
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-   
+class ProjectManager extends Instructor {
+   constructor(projectObj){
+     super(projectObj)
+     this.gradClassName = projectObj.gradClassName 
+     this.favInstructor = projectObj.favInstructor 
+   }
+   standUp(slackChannel){
+     return `${this.name} announces to ${slackChannel}, channel standy  times!`
+   }
+   debugsCode(Student,subject){
+     return `${this.name} debugs ${Student.name}'s code on ${subject}`
+   }
 }
-/*
+const managerP = new ProjectManager(ProjectManager)
+console.log(managerP);
+/* 
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
     - Now that our students have a grade build out a method on the Instructor (this will be used by _BOTH_ instructors and PM's) that will randomly add or subtract points to a student's grade. _Math.random_ will help.
